@@ -1,0 +1,17 @@
+{
+  "name": "debuss-a/pipeliner",
+  "description": "Pipeline pattern implementation made easy.",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexandre DEBUSSCHERE",
+      "email": "zizilex@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Pipeliner\\": "src/"
+    }
+  }
+}
