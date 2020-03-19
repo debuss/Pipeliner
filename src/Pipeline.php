@@ -18,12 +18,16 @@ class Pipeline implements PipelineInterface
     /** @var SplStack */
     protected $stack;
 
+    /** @var SplStack */
+    protected $backup;
+
     /**
      * Pipeline constructor.
      */
     public function __construct()
     {
         $this->stack = new SplStack();
+        $this->backup = new SplStack();
     }
 
     /**
@@ -54,9 +58,16 @@ class Pipeline implements PipelineInterface
     public function handle($payload)
     {
         if ($this->stack->isEmpty()) {
+            $this->stack = clone $this->backup;
+            $this->backup = new SplStack();
+
             return $payload;
         }
 
-        return $this->stack->shift()->process($payload, $this);
+        $stage = $this->stack->shift();
+
+        $this->backup->push($stage);
+
+        return $stage->process($payload, $this);
     }
 }

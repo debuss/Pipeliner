@@ -46,8 +46,7 @@ $pipeline
     ->pipe(new MutliplyTwo())
     ->pipe(function ($payload) {
         return $payload + 42;
-    })
-;
+    });
 
 var_dump(
     $pipeline->handle(10) // 102
